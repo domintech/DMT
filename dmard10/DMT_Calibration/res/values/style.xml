@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="YangStyleText1">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">#800080</item>
+  </style>
+  <style name="YangStyleText2">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">#FF4500</item>
+    <item name="android:fromAlpha">0.0</item>
+    <item name="android:toAlpha">0.0</item>
+  </style>
+  <style name="YangStyleText3">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">#FF7F7C</item>
+    <item name="android:fromAlpha">0.0</item>
+    <item name="android:toAlpha">0.0</item>
+  </style>
+  <style name="YangStyleText4">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">#FF7F7C</item>
+    <item name="android:fromAlpha">0.0</item>
+    <item name="android:toAlpha">0.0</item>
+  </style>
+</resources>

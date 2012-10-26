@@ -1,0 +1,69 @@
+--- Kconfig.old	2012-01-31 10:44:21.343525398 +0800
++++ Kconfig	2012-01-31 10:43:17.146650058 +0800
+
+> menuconfig     DMT_Sensor        
+>         bool "DMT_Sensor"
+>         default y
+>         depends on I2C=y
+>         
+> if DMT_Sensor
+> 
+> choice
+> 	prompt "select one item"
+> 	default SENSORS_DMARD10
+> 	
+> 	config SENSORS_DMARD03
+> 		bool "DMARD03 GSENSOR support"
+> 		---help---
+> 		  Select this for accelemeter
+> 		  sensor DMARD03.
+> 		  
+> 	config SENSORS_DMARD05
+> 		bool "DMARD05 GSENSOR support"
+> 		---help---
+> 		  Select this for accelemeter
+> 		  sensor DMARD05.
+> 		  
+> 	config SENSORS_DMARD06
+> 		bool "DMARD06 GSENSOR support"
+> 		---help---
+> 		  Select this for accelemeter
+> 		  sensor DMARD06.
+> 		  
+> 	config SENSORS_DMARD07
+> 		bool "DMARD07 GSENSOR support"
+> 		---help---
+> 		  Select this for accelemeter
+> 		  sensor DMARD07.
+> 		  
+> 	config SENSORS_DMARD08
+> 		bool "DMARD08 GSENSOR support"
+> 		---help---
+> 		  Choose this option.
+> 		  If you say yes here you get support for accelemeter
+> 		  sensor DMARD08.
+> 		  
+> 	config SENSORS_DMARD09
+> 		bool "DMARD09 GSENSOR support"
+> 		---help---
+> 		  Choose this option.
+> 		  If you say yes here you get support for accelemeter
+> 		  sensor DMARD09.
+> 		  
+> 	config SENSORS_DMARD10
+> 		bool "DMARD10 GSENSOR support"
+> 		---help---
+> 		  Choose this option.
+> 		  If you say yes here you get support for accelemeter
+> 		  sensor DMARD10.
+>
+> 	config SENSORS_DMARD18
+> 		bool "DMARD18 GSENSOR support"
+> 		---help---
+> 		  Choose this option.
+> 		  If you say yes here you get support for accelemeter
+> 		  sensor DMARD18.
+> endchoice
+> 
+> endif
+> 	  

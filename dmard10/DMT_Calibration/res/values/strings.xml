@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello DMT, activityMain!</string>
+    <string name="app_name">Gsensor calbriation</string>
+    <string name="str_title">My status：</string>
+    <string name="str_autoclose">Close auto read</string>
+    <string name="str_about">about</string>
+    <string name="str_get_offset">GET OFFSET</string>
+    <string name="str_exit">EXIT</string>
+    <string name="str_about_msg">～DMT GSENSOR～</string>
+    <string name="str_ok">Enter</string>
+    <string name="str_calibration">Click Calibration Gsensor</string>
+    <string name="str_open_button">Open Calibration button</string>
+    <string name="str_horizontal">Please keep the device in a horizontal desktop</string>
+    <string name="str_delay">change delay time</string>
+    <string name="str_acc">ACCELEROMETER (m/s^2)</string>
+    <string name="str_acc_offset">ACC OFFSET (LSB)</string>
+    <string name="str_acc_sigma">ACC SIGMA (m/s^2)</string>
+    <string name="str_mag_sigma">MAG SIGMA (uT)</string>
+    <string name="str_ori_sigma">ORI SIGMA </string>
+    <string name="str_mag">MAGNETIC (uT)</string>
+    <string name="str_ori">ORIENTATION :</string>
+</resources>
