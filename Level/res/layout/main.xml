@@ -1,9 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"> 
-    
+
+  
 	<net.androgames.level.view.LevelView 
 		android:id="@+id/level"
 	    android:layout_width="fill_parent" 
 	    android:layout_height="fill_parent" />
-	    
+<LinearLayout
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+>
+  			<Button 
+  			android:textStyle="italic"
+			android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+			android:id="@+id/cab_1"
+			android:textSize="40sp"
+			android:text="@string/str_calibration" 
+			android:textColor="@drawable/cyan"/>
+  			<TextView 
+		    android:id="@+id/horizontal" 
+		    android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content"
+		    android:text="@string/str_horizontal"
+		    android:textSize="20sp"
+		    android:textColor="@drawable/mediumvioletred"/>	
+			<TextView 
+		    android:id="@+id/accelerometer" 
+		    android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content"
+		    android:textSize="30sp" 
+		    android:text="@string/str_acc"
+		    android:textColor="@drawable/darkgreen"/>
+			<TextView 
+		    android:id="@+id/accelerometer_x" 
+		    android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content"
+		    android:textSize="30sp"
+		    android:text="@string/str_x" 
+		    android:textColor="@drawable/greenyellow"/>
+			<TextView 
+		    android:id="@+id/accelerometer_y" 
+		    android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content"
+		    android:textSize="30sp"
+		    android:text="@string/str_y" 
+		    android:textColor="@drawable/greenyellow"/>
+			<TextView 
+		    android:id="@+id/accelerometer_z" 
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content" 
+		    android:textSize="30sp"
+		    android:text="@string/str_z" 
+		    android:textColor="@drawable/greenyellow"/>
+</LinearLayout>	    
 </merge>

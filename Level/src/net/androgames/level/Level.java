@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -20,15 +21,20 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
 import android.text.util.Linkify;
+import android.util.FloatMath;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 /*
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
@@ -71,7 +77,12 @@ public class Level extends Activity implements OrientationListener {
 	public  int fd = 0;
 	int[] xyz = new int[3];
 	DecimalFormat of = new DecimalFormat("  #000;-#000");
-	
+	DecimalFormat nf = new DecimalFormat("  #0.000;-#00.000  ");
+	private Button cabiration1;
+	private TextView accelerometer_x;
+	private TextView accelerometer_y;
+	private TextView accelerometer_z;
+	private SensorManager mSensorManager01;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +93,22 @@ public class Level extends Activity implements OrientationListener {
     	soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
     	bipSoundID = soundPool.load(this, R.raw.bip, 1);
     	bipRate = getResources().getInteger(R.integer.bip_rate);
+    	
+    	/* ��oSensorManager */
+        mSensorManager01 =(SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        accelerometer_x = (TextView) findViewById(R.id.accelerometer_x);
+        accelerometer_y = (TextView) findViewById(R.id.accelerometer_y);
+        accelerometer_z = (TextView) findViewById(R.id.accelerometer_z);
+        accelerometer_x.setText("  X : " + "123455656" );
+        accelerometer_y.setText("  Y : " + "123455656" );
+        accelerometer_z.setText("  Z : " + "123455656" );
+        cabiration1 =(Button) findViewById(R.id.cab_1);
+        cabiration1.setOnClickListener(cab1_listener);
+        mSensorManager01.registerListener 
+        ( 
+          mSensorListener, 
+          mSensorManager01.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), bipRate, null
+        );
     }
     
 	@Override
@@ -90,6 +117,56 @@ public class Level extends Activity implements OrientationListener {
 	    inflater.inflate(R.menu.main, menu);
 	    return true;
 	}
+    
+	private Button.OnClickListener cab1_listener= new Button.OnClickListener(){
+		  public void onClick(View v)
+      {	
+			if(fd==0)
+			{
+				fd = Linuxc.open();
+				if(fd>0)
+					setTitle("open gsensor success! ");
+			}
+	        if (fd < 0){
+		        	setTitle("open gsensor false!");
+		        	finish(); 
+		        }
+		        xyz[0] = 1;
+			  Linuxc.cab(xyz);
+      }
+	};
+	
+	final SensorEventListener mSensorListener = new SensorEventListener()
+    {
+      private float[] mGravity = new float[3];
+      
+      @Override
+      public void onAccuracyChanged(Sensor sensor, int accuracy)
+      {
+        // TODO Auto-generated method stub
+      }
+
+      @Override
+      public void onSensorChanged(SensorEvent event)
+      {
+		// TODO Auto-generated method stub
+          DecimalFormat tds = new DecimalFormat(" #,###,000");
+       switch (event.sensor.getType())
+        {
+          case Sensor.TYPE_ACCELEROMETER:
+            System.arraycopy(event.values, 0, mGravity, 0, 3);
+            accelerometer_x.setText("  X : " + nf.format(mGravity[0]) );
+            accelerometer_y.setText("  Y : " + nf.format(mGravity[1]) );
+            accelerometer_z.setText("  Z : " + nf.format(mGravity[2]) );
+          
+          break;
+          case Sensor.TYPE_MAGNETIC_FIELD:
+            break;
+          default:
+            return;
+        }
+      }
+    };
     
     /* Handles item selections */
     public boolean onOptionsItemSelected(MenuItem item) {

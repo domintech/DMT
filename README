@@ -1,0 +1,226 @@
+Level Calibration
+
+
+.
+├── .git
+│   ├── branches
+│   ├── COMMIT_EDITMSG
+│   ├── config
+│   ├── description
+│   ├── gitk.cache
+│   ├── HEAD
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── pre-rebase.sample
+│   │   └── update.sample
+│   ├── index
+│   ├── info
+│   │   └── exclude
+│   ├── logs
+│   │   ├── HEAD
+│   │   └── refs
+│   │       └── heads
+│   │           └── master
+│   ├── objects
+│   │   ├── 08
+│   │   │   └── c1d63177de5143fd9db195233a271eb0e52b20
+│   │   ├── 5a
+│   │   │   └── 90804d7d8003f4040d101e64384dbb51abe759
+│   │   ├── 80
+│   │   │   └── 9667a74a023756cac8f70abd0e027ce44e7fd3
+│   │   ├── fa
+│   │   │   └── 5dc31bc0ce58b66cfabc781baa4e3960cca130
+│   │   ├── fd
+│   │   │   └── 0304cb69a71a59bab81a00ce59f382c41f01c6
+│   │   ├── info
+│   │   └── pack
+│   │       ├── pack-c174cbd01f7205eb5ccb60e2f9ed4aa1bdb20977.idx
+│   │       └── pack-c174cbd01f7205eb5ccb60e2f9ed4aa1bdb20977.pack
+│   ├── packed-refs
+│   └── refs
+│       ├── heads
+│       │   └── master
+│       ├── remotes
+│       │   └── origin
+│       │       └── HEAD
+│       └── tags
+├── Level
+│   ├── AndroidManifest.xml
+│   ├── ant.properties
+│   ├── assets
+│   │   └── fonts
+│   │       └── lcd.ttf
+│   ├── bin
+│   │   ├── AndroidManifest.xml
+│   │   ├── classes
+│   │   │   └── net
+│   │   │       └── androgames
+│   │   │           └── level
+│   │   │               ├── BuildConfig.class
+│   │   │               ├── config
+│   │   │               │   ├── DisplayType.class
+│   │   │               │   ├── Provider.class
+│   │   │               │   └── Viscosity.class
+│   │   │               ├── Level$1.class
+│   │   │               ├── Level$2.class
+│   │   │               ├── Level$3.class
+│   │   │               ├── Level$4.class
+│   │   │               ├── Level.class
+│   │   │               ├── LevelPreferences$1.class
+│   │   │               ├── LevelPreferences$2.class
+│   │   │               ├── LevelPreferences$3.class
+│   │   │               ├── LevelPreferences.class
+│   │   │               ├── Linuxc.class
+│   │   │               ├── orientation
+│   │   │               │   ├── Orientation.class
+│   │   │               │   ├── OrientationListener.class
+│   │   │               │   ├── OrientationProvider.class
+│   │   │               │   └── provider
+│   │   │               │       ├── ProviderAccelerometer.class
+│   │   │               │       └── ProviderOrientation.class
+│   │   │               ├── painter
+│   │   │               │   └── LevelPainter.class
+│   │   │               ├── R$array.class
+│   │   │               ├── R$attr.class
+│   │   │               ├── R.class
+│   │   │               ├── R$color.class
+│   │   │               ├── R$dimen.class
+│   │   │               ├── R$drawable.class
+│   │   │               ├── R$id.class
+│   │   │               ├── R$integer.class
+│   │   │               ├── R$layout.class
+│   │   │               ├── R$menu.class
+│   │   │               ├── R$raw.class
+│   │   │               ├── R$string.class
+│   │   │               ├── R$style.class
+│   │   │               ├── R$xml.class
+│   │   │               └── view
+│   │   │                   └── LevelView.class
+│   │   ├── classes.dex
+│   │   ├── jarlist.cache
+│   │   ├── Level.apk
+│   │   ├── Level_DEFAULT.apk
+│   │   ├── res
+│   │   │   ├── drawable
+│   │   │   │   └── icon.png
+│   │   │   ├── drawable-hdpi
+│   │   │   │   └── icon.png
+│   │   │   ├── drawable-ldpi
+│   │   │   │   └── icon.png
+│   │   │   └── drawable-xhdpi
+│   │   │       └── icon.png
+│   │   └── resources.ap_
+│   ├── build.xml
+│   ├── .classpath
+│   ├── default.properties
+│   ├── device-2012-10-28-192011.png
+│   ├── device-2012-10-28-192126.png
+│   ├── gen
+│   │   └── net
+│   │       └── androgames
+│   │           └── level
+│   │               ├── BuildConfig.java
+│   │               └── R.java
+│   ├── jni
+│   │   ├── Android.mk
+│   │   ├── Linuxc.c
+│   │   └── Linuxc.h
+│   ├── Level.svg
+│   ├── local.properties
+│   ├── make.properties
+│   ├── make.xml
+│   ├── obj
+│   │   ├── libs
+│   │   │   └── armeabi
+│   │   │       └── libgsensor.so
+│   │   └── local
+│   │       └── armeabi
+│   │           ├── libgsensor.so
+│   │           └── objs
+│   │               └── gsensor
+│   │                   ├── Linuxc.o
+│   │                   └── Linuxc.o.d
+│   ├── proguard.cfg
+│   ├── .project
+│   ├── project.properties
+│   ├── res
+│   │   ├── drawable
+│   │   │   ├── bubble_2d.xml
+│   │   │   └── icon.png
+│   │   ├── drawable-hdpi
+│   │   │   ├── bubble_2d.xml
+│   │   │   └── icon.png
+│   │   ├── drawable-ldpi
+│   │   │   ├── bubble_2d.xml
+│   │   │   └── icon.png
+│   │   ├── drawable-nodpi
+│   │   │   ├── bubble_1d.xml
+│   │   │   ├── display.xml
+│   │   │   ├── level_1d.xml
+│   │   │   ├── level_2d.xml
+│   │   │   ├── marker_1d.xml
+│   │   │   └── marker_2d.xml
+│   │   ├── drawable-xhdpi
+│   │   │   └── icon.png
+│   │   ├── layout
+│   │   │   └── main.xml
+│   │   ├── menu
+│   │   │   └── main.xml
+│   │   ├── raw
+│   │   │   └── bip.ogg
+│   │   ├── values
+│   │   │   ├── arrays.xml
+│   │   │   ├── colors.xml
+│   │   │   ├── config.xml
+│   │   │   ├── dimens.xml
+│   │   │   ├── strings.xml
+│   │   │   └── themes.xml
+│   │   ├── values-de
+│   │   │   └── strings.xml
+│   │   ├── values-es
+│   │   │   └── strings.xml
+│   │   ├── values-fr
+│   │   │   └── strings.xml
+│   │   ├── values-it
+│   │   │   └── strings.xml
+│   │   ├── values-nl
+│   │   │   └── strings.xml
+│   │   ├── values-pt
+│   │   │   └── strings.xml
+│   │   ├── values-v11
+│   │   │   └── themes.xml
+│   │   └── xml
+│   │       └── preferences.xml
+│   ├── .settings
+│   │   └── org.eclipse.jdt.core.prefs
+│   └── src
+│       └── net
+│           └── androgames
+│               └── level
+│                   ├── config
+│                   │   ├── DisplayType.java
+│                   │   ├── Provider.java
+│                   │   └── Viscosity.java
+│                   ├── Level.java
+│                   ├── LevelPreferences.java
+│                   ├── Linuxc.java
+│                   ├── orientation
+│                   │   ├── Orientation.java
+│                   │   ├── OrientationListener.java
+│                   │   ├── OrientationProvider.java
+│                   │   └── provider
+│                   │       ├── ProviderAccelerometer.java
+│                   │       └── ProviderOrientation.java
+│                   ├── painter
+│                   │   └── LevelPainter.java
+│                   └── view
+│                       └── LevelView.java
+├── Level_Original.tar.bz2
+└── README
+
+78 directories, 142 files

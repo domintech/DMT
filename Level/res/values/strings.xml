@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="str_acc">ACCELEROMETER (m/s^2)</string>
+    <string name="str_x">X :</string>
+    <string name="str_y">Y :</string>
+    <string name="str_z">Z :</string>
+    <string name="str_horizontal">Please keep the device in a horizontal desktop</string>
+    <string name="str_calibration">Calibration Gsensor</string>
     <string name="name">Bubble</string>
     <string name="reset">Reset</string>
     <string name="not_supported">Orientation not supported</string>

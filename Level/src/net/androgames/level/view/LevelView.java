@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -94,6 +95,7 @@ public class LevelView extends SurfaceView implements SurfaceHolder.Callback, On
 	public boolean onTouch(View v, MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN && painter != null) {
 			painter.onTouch((int) event.getX(), (int) event.getY());
+			Log.d("@@@Level@@@",  "Level");
 		}
 		return true;
 	}

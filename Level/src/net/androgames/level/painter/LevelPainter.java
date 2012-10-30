@@ -15,6 +15,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 /*
@@ -174,7 +175,7 @@ public class LevelPainter implements Runnable {
         this.ecoMode = ecoMode;
         this.handler = handler;
         this.frameRate = 1000 / context.getResources().getInteger(R.integer.frame_rate);
-        
+        Log.d("@@@Level@@@",  "Level");
         // drawable
         this.level1D = context.getResources().getDrawable(R.drawable.level_1d);
         this.level2D = context.getResources().getDrawable(R.drawable.level_2d);
@@ -186,7 +187,7 @@ public class LevelPainter implements Runnable {
         
         // vitesse de la bulle
         this.viscosity = viscosity;
-        
+        Log.d("@@@Level@@@",  "Level");
         // config
         this.showAngle = showAngle;
     	this.displayFormat = new DecimalFormat(angleType.getDisplayFormat());
