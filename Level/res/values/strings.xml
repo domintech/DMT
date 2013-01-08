@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="str_exit">EXIT</string>
+    <string name="str_delay">change delay time</string>
     <string name="str_acc">ACCELEROMETER (m/s^2)</string>
-    <string name="str_x">X :</string>
-    <string name="str_y">Y :</string>
-    <string name="str_z">Z :</string>
+	<string name="str_acc_offset">ACC OFFSET (LSB)</string>
+    <string name="str_acc_sigma">ACC SIGMA (m/s^2)</string>
+    <string name="str_mag_sigma">MAG SIGMA (uT)</string>
+    <string name="str_ori_sigma">ORI SIGMA </string>
+    <string name="str_mag">MAGNETIC (uT)</string>
+    <string name="str_ori">ORIENTATION :</string>
     <string name="str_horizontal">Please keep the device in a horizontal desktop</string>
-    <string name="str_calibration">Calibration Gsensor</string>
+    <string name="str_calibration">Gsensor Calibration </string>
+    <string name="str_show_detail">Chioce checkbox show sensor detail information</string>
     <string name="name">Bubble</string>
     <string name="reset">Reset</string>
     <string name="not_supported">Orientation not supported</string>
@@ -13,7 +19,7 @@
     <string name="save">Save</string>
     <string name="ok">Ok</string>
     <string name="calibrate">Calibrate</string>
-    <string name="calibrate_info">press MENU to calibrate...</string>
+    <string name="calibrate_info">If you want to calibrate the gsensor,Please keep the device in a horizontal desktop.Click \"Gsensor Calibrate\" button calibrate gsensor,Click \"EXIT\" button to Exit</string>
     <string name="calibrate_title">Calibrate your phone</string>
     <string name="calibrate_title_success">open DMT device success!</string>
     <string name="calibrate_title_false">open DMT device false!</string>

@@ -63,13 +63,13 @@ JNIEXPORT jint JNICALL Java_net_androgames_level_Linuxc_cab
 {
  int tmp[3];
  jint* body = (*env)->GetIntArrayElements(env, arr, 0);
- tmp[0] = body[0];
- tmp[1] = 0;
- tmp[2] = 0;
+ //tmp[0] = body[0];
+ //tmp[1] = 0;
+ //tmp[2] = 0;
  ioctl(fd,SENSOR_CALIBRATION, &tmp);
- //body[0] = tmp[0];
- //body[1] = tmp[1];
- //body[2] = tmp[2];
+ body[0] = tmp[0];
+ body[1] = tmp[1];
+ body[2] = tmp[2];
  return 0;               
 }
 

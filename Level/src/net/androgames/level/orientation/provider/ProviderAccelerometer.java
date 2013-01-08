@@ -59,17 +59,18 @@ public class ProviderAccelerometer extends OrientationProvider {
 	    
 	    switch (displayOrientation) {
 	    case Surface.ROTATION_270:
-		    SensorManager.remapCoordinateSystem(R, 
-		    		SensorManager.AXIS_MINUS_Y, SensorManager.AXIS_X, outR);
-	    	break;
+	    	//以下關閉螢幕翻轉
+		    //SensorManager.remapCoordinateSystem(R, 
+		    		//SensorManager.AXIS_MINUS_Y, SensorManager.AXIS_X, outR);
+	    	//break;
 	    case Surface.ROTATION_180:
-		    SensorManager.remapCoordinateSystem(R, 
-		    		SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y, outR);
-	    	break;
+		    //SensorManager.remapCoordinateSystem(R, 
+		    		//SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y, outR);
+	    	//break;
 	    case Surface.ROTATION_90:
-		    SensorManager.remapCoordinateSystem(R, 
-		    		SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X, outR);
-	    	break;
+		    //SensorManager.remapCoordinateSystem(R, 
+		    		//SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X, outR);
+	    	//break;
 	    case Surface.ROTATION_0:
     	default:
 		    SensorManager.remapCoordinateSystem(R, 

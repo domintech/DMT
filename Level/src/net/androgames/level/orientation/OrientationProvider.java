@@ -157,7 +157,8 @@ public abstract class OrientationProvider implements SensorEventListener {
 		}
 		
 		if (!locked || orientation == null) {
-	        if (pitch < -45 && pitch > -135) {
+			//remove bu YANG 2013-01-07 (only stay in Orientation.LANDING)
+	      /*  if (pitch < -45 && pitch > -135) {
 	            // top side up
 	            orientation = Orientation.TOP;
 	        } else if (pitch > 45 && pitch < 135) {
@@ -172,7 +173,8 @@ public abstract class OrientationProvider implements SensorEventListener {
 	        } else {
 	        	// landing
 	        	orientation = Orientation.LANDING;
-	        }
+	        }*/
+			orientation = Orientation.LANDING;
 		}
 		
 		if (calibrating) {

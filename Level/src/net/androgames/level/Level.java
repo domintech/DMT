@@ -28,6 +28,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,16 +75,60 @@ public class Level extends Activity implements OrientationListener {
 	private int bipRate;
 	private long lastBip;
 	
+	private Button mClose;
+	private CheckBox mShowDetail;
+	private LinearLayout mLayout;
 	/* DMT Calibration*/
+	String str[] = { "Fastest", "Game  ", "UI     ", "Normal " };
 	public  int fd = 0;
 	int[] xyz = new int[3];
 	DecimalFormat of = new DecimalFormat("  #000;-#000");
 	DecimalFormat nf = new DecimalFormat("  #0.000;-#00.000  ");
+    DecimalFormat tds = new DecimalFormat(" #,###,000");
 	private Button cabiration1;
+	private Button close_device;
+	private Button delay;
 	private TextView accelerometer_x;
 	private TextView accelerometer_y;
 	private TextView accelerometer_z;
+	private TextView acc_offset_x;
+	private TextView acc_offset_y;
+	private TextView acc_offset_z;
+	private TextView acc_sigma_x;
+	private TextView acc_sigma_y;
+	private TextView acc_sigma_z;
+	//private TextView magnetic;
+	private TextView magnetic_x;
+	private TextView magnetic_y;
+	private TextView magnetic_z;
+	private TextView mag_sigma_x;
+	private TextView mag_sigma_y;
+	private TextView mag_sigma_z;
+	//private TextView orientation;
+	private TextView orientation_x;
+	private TextView orientation_y;
+	private TextView orientation_z;
+	private TextView ori_sigma_x;
+	private TextView ori_sigma_y;
+	private TextView ori_sigma_z;
 	private SensorManager mSensorManager01;
+	int delay_mode=2;
+	long TimeNewACC;
+	long delayACC;
+	static long TimeOldACC;
+	  
+	float[] sum_acc_XYZ = new float[3];
+	float[] sumAccSquare= new float[3];
+	float[] sigma_acc=new float[3];
+	int countS_acc=0;
+	float[] sum_mag_XYZ = new float[3];
+	float[] sumMagSquare= new float[3];
+	float[] sigma_mag=new float[3];
+	int countS_mag=0;
+	float[] sum_ori_XYZ = new float[3];
+	float[] sumOriSquare= new float[3];
+	float[] sigma_ori=new float[3];
+	int countS_ori=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,16 +145,49 @@ public class Level extends Activity implements OrientationListener {
         accelerometer_x = (TextView) findViewById(R.id.accelerometer_x);
         accelerometer_y = (TextView) findViewById(R.id.accelerometer_y);
         accelerometer_z = (TextView) findViewById(R.id.accelerometer_z);
+        acc_offset_x = (TextView) findViewById(R.id.acc_offset_x);
+        acc_offset_y = (TextView) findViewById(R.id.acc_offset_y);
+        acc_offset_z = (TextView) findViewById(R.id.acc_offset_z);
+        acc_sigma_x = (TextView) findViewById(R.id.acc_sigma_x);
+        acc_sigma_y = (TextView) findViewById(R.id.acc_sigma_y);
+        acc_sigma_z = (TextView) findViewById(R.id.acc_sigma_z);
         accelerometer_x.setText("  X : " + "123455656" );
         accelerometer_y.setText("  Y : " + "123455656" );
         accelerometer_z.setText("  Z : " + "123455656" );
         cabiration1 =(Button) findViewById(R.id.cab_1);
+        close_device = (Button) findViewById(R.id.close);
+		delay = (Button) findViewById(R.id.delay);
         cabiration1.setOnClickListener(cab1_listener);
+        close_device.setOnClickListener(close_listener);
+		delay.setOnClickListener(delay_listener);
         mSensorManager01.registerListener 
         ( 
           mSensorListener, 
           mSensorManager01.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), bipRate, null
         );
+        
+        //mClose = (Button) findViewById(R.id.cab_cancel);
+		mLayout = (LinearLayout) findViewById(R.id.detail_layout);
+		mShowDetail = (CheckBox) findViewById(R.id.show_detail);
+		//mClose.setOnClickListener(close_listener);
+		if (mShowDetail.isChecked()) {
+			mLayout.setVisibility(View.VISIBLE);
+		} else {
+			mLayout.setVisibility(View.GONE);
+		}
+		mShowDetail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						if (isChecked) {
+							mLayout.setVisibility(View.VISIBLE);
+						} else {
+							mLayout.setVisibility(View.GONE);
+						}
+
+					}
+				});
     }
     
 	@Override
@@ -125,15 +204,99 @@ public class Level extends Activity implements OrientationListener {
 			{
 				fd = Linuxc.open();
 				if(fd>0)
-					setTitle("open gsensor success! ");
+					setTitle("open device success! ");
 			}
 	        if (fd < 0){
-		        	setTitle("open gsensor false!");
+		        	setTitle("open device false!");
+		        	//toast實現含圖片
+				      //ImageView mView01 = new ImageView(Led_Control.this);
+				      TextView mTextView = new TextView(Level.this);
+				      LinearLayout lay = new LinearLayout(Level.this);   
+				    //設定mTextView去抓取string值
+				      mTextView.setText("open device false!");
+				      Linkify.addLinks(mTextView,Linkify.WEB_URLS|Linkify.EMAIL_ADDRESSES|Linkify.PHONE_NUMBERS);  
+				      Toast toast = Toast.makeText(Level.this, mTextView.getText(), Toast.LENGTH_LONG);        
+				      View textView = toast.getView();
+				      lay.setOrientation(LinearLayout.HORIZONTAL);
+				      //mView01.setImageResource(R.drawable.s); // 在Toast裡加上圖片
+				      //lay.addView(mView01);     // 在Toast裡顯示圖片
+				      lay.addView(textView);    // 在Toast裡顯示文字
+				      toast.setView(lay);
+				      toast.show();
+		             //打開設備文件失敗的話，就退出 
 		        	finish(); 
+		        }
+		        else {
+		        	
+		        	//TextView mTextView = new TextView(DMT_GSENSORActivity.this);
+				      LinearLayout lay = new LinearLayout(Level.this);   
+				    //設定mTextView去抓取string值
+				    //  mTextView.setText("open device success!");
+				    //  Linkify.addLinks(mTextView,Linkify.WEB_URLS|Linkify.EMAIL_ADDRESSES|Linkify.PHONE_NUMBERS);  
+				     // Toast toast = Toast.makeText(DMT_GSENSORActivity.this, mTextView.getText(), Toast.LENGTH_LONG);        
+				     // View textView = toast.getView();
+				      lay.setOrientation(LinearLayout.HORIZONTAL);
+				      //mView01.setImageResource(R.drawable.s); // 在Toast裡加上圖片
+				      //lay.addView(mView01);     // 在Toast裡顯示圖片
+				     // lay.addView(textView);    // 在Toast裡顯示文字
+				     // toast.setView(lay);
+				     // toast.show();
 		        }
 		        xyz[0] = 1;
 			  Linuxc.cab(xyz);
+			  TextView mTextView = new TextView(Level.this);
+		      LinearLayout lay = new LinearLayout(Level.this);   
+		    //設定mTextView去抓取string值
+		      //mTextView.setText("Offset value (x,y,z)= : " + of.format(xyz[0]) + " " + of.format(xyz[1]) + " " + of.format(xyz[2]));
+		      mTextView.setText("Calibration Success");
+		      acc_offset_x.setText("  X : " + of.format(xyz[0]) + "  ");
+			  acc_offset_y.setText("  Y : " + of.format(xyz[1]) + "  ");
+			  acc_offset_z.setText("  Z : " + of.format(xyz[2]) + "  ");
+		      Linkify.addLinks(mTextView,Linkify.WEB_URLS|Linkify.EMAIL_ADDRESSES|Linkify.PHONE_NUMBERS);  
+		      Toast toast = Toast.makeText(Level.this, mTextView.getText(), Toast.LENGTH_LONG);        
+		      View textView = toast.getView();
+		      lay.setOrientation(LinearLayout.HORIZONTAL);
+		      lay.addView(textView);    
+		      toast.setView(lay);
+		      toast.show();
       }
+	};
+	private Button.OnClickListener close_listener = new Button.OnClickListener() {
+		public void onClick(View v) {
+			TextView mTextView = new TextView(Level.this);
+			LinearLayout lay = new LinearLayout(Level.this);
+			// 設定mTextView去抓取string值
+			mTextView.setText("close device!");
+			Linkify.addLinks(mTextView, Linkify.WEB_URLS
+					| Linkify.EMAIL_ADDRESSES | Linkify.PHONE_NUMBERS);
+			Toast toast = Toast.makeText(Level.this,
+					mTextView.getText(), Toast.LENGTH_LONG);
+			View textView = toast.getView();
+			lay.setOrientation(LinearLayout.HORIZONTAL);
+			// mView01.setImageResource(R.drawable.s); // 在Toast裡加上圖片
+			// lay.addView(mView01); // 在Toast裡顯示圖片
+			lay.addView(textView); // 在Toast裡顯示文字
+			toast.setView(lay);
+			toast.show();
+			/* 關閉設備文件 */
+			Linuxc.close();
+			/* 退出運用程序 */
+			finish();
+		}
+	};
+	private Button.OnClickListener delay_listener = new Button.OnClickListener() {
+
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			//delay_mode++;
+			//delay_mode %= 4;
+
+			mSensorManager01.registerListener(mSensorListener, mSensorManager01
+					.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), delay_mode);
+			delay.setText("Delay mode=" + str[delay_mode]);
+
+		}
+
 	};
 	
 	final SensorEventListener mSensorListener = new SensorEventListener()
@@ -158,7 +321,40 @@ public class Level extends Activity implements OrientationListener {
             accelerometer_x.setText("  X : " + nf.format(mGravity[0]) );
             accelerometer_y.setText("  Y : " + nf.format(mGravity[1]) );
             accelerometer_z.setText("  Z : " + nf.format(mGravity[2]) );
-          
+            TimeNewACC = event.timestamp;
+            delayACC = (long)((TimeNewACC - TimeOldACC)/1000000);//
+            Log.d("@@@Sensor.TYPE_ACCELEROMETER@@@", delayACC + " ms");
+            delay.setText("Delay mode="+str[delay_mode]+tds.format(delayACC)+" ms");
+            TimeOldACC = TimeNewACC;
+            
+            sum_acc_XYZ[0] +=mGravity[0];
+            sum_acc_XYZ[1] +=mGravity[1];
+            sum_acc_XYZ[2] +=mGravity[2];
+            sumAccSquare[0]+=mGravity[0]*mGravity[0];
+            sumAccSquare[1]+=mGravity[1]*mGravity[1];
+            sumAccSquare[2]+=mGravity[2]*mGravity[2];
+            countS_acc++;
+            if(countS_acc==100)
+            {
+            	sum_acc_XYZ[0]/=100;
+            	sum_acc_XYZ[1]/=100;
+            	sum_acc_XYZ[2]/=100;
+             	sigma_acc[0]=FloatMath.sqrt(sumAccSquare[0]/100-sum_acc_XYZ[0]*sum_acc_XYZ[0]);
+            	sigma_acc[1]=FloatMath.sqrt(sumAccSquare[1]/100-sum_acc_XYZ[1]*sum_acc_XYZ[1]);
+            	sigma_acc[2]=FloatMath.sqrt(sumAccSquare[2]/100-sum_acc_XYZ[2]*sum_acc_XYZ[2]);
+            	sum_acc_XYZ[0] =0;
+            	sum_acc_XYZ[1] =0;
+            	sum_acc_XYZ[2] =0;
+                sumAccSquare[0]=0;
+                sumAccSquare[1]=0;
+                sumAccSquare[2]=0;
+            	countS_acc=0;            	
+            	
+            	acc_sigma_x.setText("  X : " + nf.format(sigma_acc[0]) );
+                acc_sigma_y.setText("  Y : " + nf.format(sigma_acc[1]) );
+                acc_sigma_z.setText("  Z : " + nf.format(sigma_acc[2]) );
+            	Log.v("sigma_acc(x,y,z)=",sigma_acc[0]+","+sigma_acc[1]+","+sigma_acc[2]);
+            }
           break;
           case Sensor.TYPE_MAGNETIC_FIELD:
             break;
