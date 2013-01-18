@@ -4,7 +4,7 @@
     package="net.androgames.level"
     android:installLocation="preferExternal"
     android:versionCode="32"
-    android:versionName="1.9.3.1002">
+    android:versionName="2.0">
     
     <supports-screens
         android:largeScreens="true"
@@ -21,6 +21,7 @@
     <uses-feature android:name="android.hardware.sensor.accelerometer" />
 
     <application 
+        android:debuggable="false"
     	android:icon="@drawable/icon" 
     	android:label="@string/name">
     	
